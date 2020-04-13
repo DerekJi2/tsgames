@@ -1,4 +1,5 @@
 import { TetrisGame } from './tetris/tetris-game';
+import $ from 'jquery';
 
 const tetris = new TetrisGame();
-window.onload = tetris.init;
+$(document).ready(() => tetris.init() );

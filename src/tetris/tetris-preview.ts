@@ -3,6 +3,7 @@ import { IShapeOptions } from './models/shape-options.interface';
 import { initialShapeOptions } from './utilities/initials';
 import { random } from './utilities/functions';
 import { xOffsets, yOffsets, gameScreen } from './utilities/constants';
+import $ from 'jquery';
 
 export class TetrisPreview {
   protected shape: TetrisShape;
@@ -25,7 +26,7 @@ export class TetrisPreview {
 
   draw() {
     this.randomNext();
-    gameScreen.nextBlock.innerHTML = '';
-    this.shape.drawBlocks(gameScreen.nextBlock);
+    gameScreen.nextBlock.html('');
+    this.shape.drawBlocks($('#nextBlock'));
   }
 }

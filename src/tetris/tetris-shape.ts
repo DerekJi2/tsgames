@@ -74,7 +74,7 @@ export class TetrisShape {
    * Draw tiles one by one
    * @param obj HTMLElement
    */
-  draw(obj: HTMLElement): void {
+  draw(obj: JQuery<HTMLElement>): void {
     this.setBlocks();
     for (let i = 0; i < this.tilesNumber; i++) {
       this.blocks[i].draw(obj);
@@ -85,13 +85,13 @@ export class TetrisShape {
    * Draw tiles all together
    * @param obj HTMLElement
    */
-  drawBlocks(obj: HTMLElement) {
+  drawBlocks(obj: JQuery<HTMLElement>) {
     let html = '';
     this.setBlocks();
     for (let i = 0; i < this.tilesNumber; i++) {
       html += this.blocks[i].getHtml();
     }
-    obj.innerHTML = html;
+    obj.html(html);
   }
 
   /**

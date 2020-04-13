@@ -1,9 +1,8 @@
 import { ITileOptions } from './models/tile-options.interface';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 import { initialTileOptions } from './utilities/initials';
-import { tileTemplateHtml } from './utilities/constants';
+import $ from 'jquery';
 
-const template = Object.assign('', tileTemplateHtml);
 export class TetrisTile {
   constructor(protected options: ITileOptions = null) {
     this.options = options ? options : initialTileOptions();
@@ -33,7 +32,7 @@ export class TetrisTile {
     imgPoint.x = 0 - this.options.colorId * this.options.width;
     imgPoint.y = 0 - this.options.iconId * this.options.width;
 
-    let styleStr: string = Object.assign('', template);
+    let styleStr: string = $('#tile-template-html').html();
     styleStr = styleStr.replace(/_TOP_/g,  this.options.top.toString() );
     styleStr = styleStr.replace(/_LEFT_/g, this.options.left.toString() );
     styleStr = styleStr.replace(/_BPX_/g, imgPoint.x.toString() );
@@ -48,9 +47,9 @@ export class TetrisTile {
    * @param obj HTMLElement
    * @param bTop boolean
    */
-  draw(obj: HTMLElement, bTop?: boolean) {
+  draw(obj: JQuery<HTMLElement>, bTop?: boolean) {
     const html = this.getHtml();
-    const prevHtml = obj.innerHTML;
-    obj.innerHTML = (bTop === true) ? html + prevHtml : html;
+    const prevHtml = obj.html();
+    obj.html( (bTop === true) ? html + prevHtml : html);
   }
 }

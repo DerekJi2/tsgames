@@ -1,5 +1,5 @@
 import { TetrisMatrix } from '../models/tetris-matrix.type';
-import { $ } from '../utilities/functions';
+import $ from 'jquery';
 
 export const _DEBUG_ = true;
 export const tileSize = 28;
@@ -14,7 +14,7 @@ export const timeInterval = 200; // ms
 export const tileTemplateHtml = '<div style="top:_TOP_px; left:_LEFT_px; background-position:_BPX_px _BPY_px;"></div>';
 
 export const gameScreen = {
-  debug: $('debugFrm'),
+  debug: $('#debugFrm'),
   grid: $('grid'),
   stage: $('stage'),
   gameover: $('gameover'),

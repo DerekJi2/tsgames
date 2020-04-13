@@ -7,6 +7,10 @@
     "target": "es6",
     "lib": ["esnext", "dom"],
     "declaration": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },

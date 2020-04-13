@@ -1,9 +1,9 @@
-import { screenMaxY, screenMaxX, gameScreen, _DEBUG_ } from './utilities/constants';
+import { gameScreen, _DEBUG_ } from './utilities/constants';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 import { ETetrisGameStatus } from './models/tetris-game-status.enum';
-import { $ } from './utilities/functions';
 import { TetrisPreview } from './tetris-preview';
 import { initialMatrix } from './utilities/initials';
+import $ from 'jquery';
 
 export class TetrisGame {
   public score = 0;
@@ -28,7 +28,7 @@ export class TetrisGame {
    */
   createNewGame(): void {
     this.score = 0;
-    gameScreen.score.innerText = '0';
+    gameScreen.score.text('0');
   }
 
   /**
@@ -52,15 +52,15 @@ export class TetrisGame {
   toggleGameStatus(): void {
     switch (this.status) {
       case ETetrisGameStatus.notStarted:
-        if (gameScreen.stopButton.innerText === 'Stop') {
+        if (gameScreen.stopButton.val() === 'Stop') {
           break;
         }
-        gameScreen.stopButton.innerText = 'Stop';
+        gameScreen.stopButton.text('Stop');
         this.begin();
         break;
 
       case ETetrisGameStatus.running:
-        gameScreen.stopButton.innerText = 'Start';
+        gameScreen.stopButton.text('Start');
         this.stop();
         break;
 
@@ -71,7 +71,7 @@ export class TetrisGame {
 
   showDebugFrm() {
     var styleStr = _DEBUG_ ? 'none' : 'block';
-    gameScreen.debug.style.display = styleStr;
+    $('#debugFrm').css('display', styleStr);
   }
 
   showNext() { this.preview.draw(); }
