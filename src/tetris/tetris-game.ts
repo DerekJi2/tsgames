@@ -1,4 +1,4 @@
-import { gameScreen, _DEBUG_ } from './utilities/constants';
+import * as $constants from './utilities/constants';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 import { ETetrisGameStatus } from './models/tetris-game-status.enum';
 import { TetrisPreview } from './tetris-preview';
@@ -28,7 +28,7 @@ export class TetrisGame {
    */
   createNewGame(): void {
     this.score = 0;
-    gameScreen.score.text('0');
+    $constants.gameScreen.score.text('0');
   }
 
   /**
@@ -52,15 +52,15 @@ export class TetrisGame {
   toggleGameStatus(): void {
     switch (this.status) {
       case ETetrisGameStatus.notStarted:
-        if (gameScreen.stopButton.val() === 'Stop') {
+        if ($constants.gameScreen.stopButton.val() === 'Stop') {
           break;
         }
-        gameScreen.stopButton.text('Stop');
+        $constants.gameScreen.stopButton.text('Stop');
         this.begin();
         break;
 
       case ETetrisGameStatus.running:
-        gameScreen.stopButton.text('Start');
+        $constants.gameScreen.stopButton.text('Start');
         this.stop();
         break;
 
@@ -70,8 +70,8 @@ export class TetrisGame {
   }
 
   showDebugFrm() {
-    var styleStr = _DEBUG_ ? 'none' : 'block';
-    $('#debugFrm').css('display', styleStr);
+    var styleStr = $constants._DEBUG_ ? 'none' : 'block';
+    $('#debugfrm').css('display', styleStr);
   }
 
   showNext() { this.preview.draw(); }

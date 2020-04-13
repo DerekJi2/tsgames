@@ -14,7 +14,7 @@ export const timeInterval = 200; // ms
 export const tileTemplateHtml = '<div style="top:_TOP_px; left:_LEFT_px; background-position:_BPX_px _BPY_px;"></div>';
 
 export const gameScreen = {
-  debug: $('#debugFrm'),
+  debug: $('#debugfrm'),
   grid: $('grid'),
   stage: $('stage'),
   gameover: $('gameover'),
@@ -47,7 +47,7 @@ export const yOffsetL = [tileSize, 10 + tileSize, tileSize, 10 + tileSize];  // 
 export const yOffsetJ = [tileSize, 10 + tileSize, tileSize, 10 + tileSize];  // J: (90, 180, 270, 0) -- clockwise rotation
 export const yOffsetO = [10, 10, 10, 10];    // O
 
-export const xOffsets = [ xOffsetI, xOffsetZ, xOffsetS, xOffsetT, xOffsetT, xOffsetL, xOffsetJ, xOffsetO];
-export const yOffsets = [ yOffsetI, yOffsetZ, yOffsetS, yOffsetT, yOffsetT, yOffsetL, yOffsetJ, yOffsetO];
+export const xOffsets = [ xOffsetI, xOffsetZ, xOffsetS, xOffsetT, xOffsetL, xOffsetJ, xOffsetO];
+export const yOffsets = [ yOffsetI, yOffsetZ, yOffsetS, yOffsetT, yOffsetL, yOffsetJ, yOffsetO];
 
 export const shapes: TetrisMatrix = [shapeI, shapeZ, shapeS, shapeT, shapeL, shapeJ, shapeO];

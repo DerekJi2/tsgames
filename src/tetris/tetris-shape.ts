@@ -2,7 +2,7 @@ import { initialTileOptions, initialShapeOptions } from './utilities/initials';
 import { TetrisTile } from './tetris-title';
 import { IShapeOptions } from './models/shape-options.interface';
 import { hex2binstr } from './utilities/functions';
-import { shapes, tileSize, rotationSequence, gameScreen } from './utilities/constants';
+import * as $constants from './utilities/constants';
 import { ITileOptions } from './models/tile-options.interface';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 
@@ -30,7 +30,7 @@ export class TetrisShape {
    * Setup tiles
    */
   setBlocks() {
-    const binstr = hex2binstr(shapes[this.options.typeId][this.options.direction].toString(), 16);
+    const binstr = hex2binstr($constants.shapes[this.options.typeId][this.options.direction].toString(), 16);
 
     const unitArray = [binstr.substr(0, 4),
       binstr.substr(4, 4),
@@ -91,6 +91,7 @@ export class TetrisShape {
     for (let i = 0; i < this.tilesNumber; i++) {
       html += this.blocks[i].getHtml();
     }
+    console.log(html);
     obj.html(html);
   }
 
@@ -100,8 +101,8 @@ export class TetrisShape {
    */
   moveLeftAllowed(matrix: TetrisMatrix): boolean {
     for (let i = 0; i < this.tilesNumber; i++) {
-      const nextLeft = this.blocks[i].left / tileSize - 1;
-      const nextTop = this.blocks[i].top / tileSize;
+      const nextLeft = this.blocks[i].left / $constants.tileSize - 1;
+      const nextTop = this.blocks[i].top / $constants.tileSize;
 
       if (nextLeft < 0 || matrix[nextTop][nextLeft]  > -1) {
         return false;
@@ -117,8 +118,8 @@ export class TetrisShape {
    */
   moveRightAllowed(matrix: TetrisMatrix): boolean {
     for (let i = 0; i < this.tilesNumber; i++) {
-      const nextLeft = this.blocks[i].left / tileSize + 1;
-      const nextTop = this.blocks[i].top / tileSize;
+      const nextLeft = this.blocks[i].left / $constants.tileSize + 1;
+      const nextTop = this.blocks[i].top / $constants.tileSize;
 
       if (nextLeft > 9 || matrix[nextTop][nextLeft]  > -1) {
         return false;
@@ -134,8 +135,8 @@ export class TetrisShape {
    */
   moveDownAllowed(matrix: TetrisMatrix): boolean {
     for (let i = 0; i < this.tilesNumber; i++) {
-      const nextLeft = this.blocks[i].left / tileSize;
-      const nextTop = this.blocks[i].top / tileSize + 1;
+      const nextLeft = this.blocks[i].left / $constants.tileSize;
+      const nextTop = this.blocks[i].top / $constants.tileSize + 1;
 
       if (nextTop > 19 || matrix[nextTop][nextLeft]  > -1) {
         return false;
@@ -151,12 +152,12 @@ export class TetrisShape {
    */
   rotateAllowed(matrix: TetrisMatrix): boolean {
     const options = Object.assign({}, this.options);
-    options.direction = rotationSequence[this.options.direction];
+    options.direction = $constants.rotationSequence[this.options.direction];
     var newShape = new TetrisShape(options);
 
     for (let i = 0; i < 4; i++) {
-      const nextLeft = Math.floor(newShape.blocks[i].left / tileSize);
-      const nextTop = Math.floor(newShape.blocks[i].top / tileSize);
+      const nextLeft = Math.floor(newShape.blocks[i].left / $constants.tileSize);
+      const nextTop = Math.floor(newShape.blocks[i].top / $constants.tileSize);
 
       if (nextTop > 19 || nextLeft > 9 || nextLeft < 0 || matrix[nextTop][nextLeft]  > -1) {
         return false;
@@ -165,26 +166,26 @@ export class TetrisShape {
   }
 
   moveDown() {
-    this.options.top += tileSize;
+    this.options.top += $constants.tileSize;
     this.setBlocks();
-    this.drawBlocks(gameScreen.stage);
+    this.drawBlocks($constants.gameScreen.stage);
   }
 
   moveLeft() {
-    this.options.left -= tileSize;
+    this.options.left -= $constants.tileSize;
     this.setBlocks();
-    this.drawBlocks(gameScreen.stage);
+    this.drawBlocks($constants.gameScreen.stage);
   }
 
   moveRight() {
-    this.options.left += tileSize;
+    this.options.left += $constants.tileSize;
     this.setBlocks();
-    this.drawBlocks(gameScreen.stage);
+    this.drawBlocks($constants.gameScreen.stage);
   }
 
   rotate() {
-    this.options.direction = rotationSequence[this.options.direction];
+    this.options.direction = $constants.rotationSequence[this.options.direction];
     this.setBlocks();
-    this.drawBlocks(gameScreen.stage);
+    this.drawBlocks($constants.gameScreen.stage);
   }
 }
