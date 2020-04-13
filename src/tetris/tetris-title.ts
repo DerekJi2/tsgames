@@ -1,9 +1,9 @@
 import { ITileOptions } from './models/tile-options.interface';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 import { initialTileOptions } from './utilities/initials';
+import { tileTemplateHtml } from './utilities/constants';
 
-const template = require('./templates/tile.template.html').default;
-
+const template = Object.assign('', tileTemplateHtml);
 export class TetrisTile {
   constructor(protected options: ITileOptions = null) {
     this.options = options ? options : initialTileOptions();
@@ -20,7 +20,7 @@ export class TetrisTile {
   occupyCell(matrix: TetrisMatrix) {
     var x = Math.floor(this.options.left / this.options.width);
     var y = Math.floor(this.options.top / this.options.width);
-    var cellVal = this.options.color;
+    var cellVal = this.options.colorId;
 
     matrix[y][x] = cellVal;
   }
@@ -30,14 +30,14 @@ export class TetrisTile {
    */
   getHtml() {
     const imgPoint = {x: 0, y: 0};
-    imgPoint.x = 0 - this.options.color * this.options.width;
-    imgPoint.y = 0 - this.options.icon * this.options.width;
+    imgPoint.x = 0 - this.options.colorId * this.options.width;
+    imgPoint.y = 0 - this.options.iconId * this.options.width;
 
-    let styleStr = Object.assign({}, template);
-    styleStr = styleStr.replace(/_TOP_/g,  this.options.top );
-    styleStr = styleStr.replace(/_LEFT_/g, this.options.left );
-    styleStr = styleStr.replace(/_BPX_/g, imgPoint.x );
-    styleStr = styleStr.replace(/_BPY_/g, imgPoint.y );
+    let styleStr: string = Object.assign('', template);
+    styleStr = styleStr.replace(/_TOP_/g,  this.options.top.toString() );
+    styleStr = styleStr.replace(/_LEFT_/g, this.options.left.toString() );
+    styleStr = styleStr.replace(/_BPX_/g, imgPoint.x.toString() );
+    styleStr = styleStr.replace(/_BPY_/g, imgPoint.y.toString() );
 
     return styleStr;
   }

@@ -1,7 +1,7 @@
 export interface IShapeOptions {
-  color: number;
-  icon: number;
-  type: number;
+  colorId: number;
+  iconId: number;
+  typeId: number;
   direction: number;
   top: number;
   left: number;

@@ -2,7 +2,7 @@ import { initialTileOptions, initialShapeOptions } from './utilities/initials';
 import { TetrisTile } from './tetris-title';
 import { IShapeOptions } from './models/shape-options.interface';
 import { hex2binstr } from './utilities/functions';
-import { shapes, tileSize, rotationSequence, TetrisGame } from './utilities/constants';
+import { shapes, tileSize, rotationSequence, gameScreen } from './utilities/constants';
 import { ITileOptions } from './models/tile-options.interface';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 
@@ -30,7 +30,7 @@ export class TetrisShape {
    * Setup tiles
    */
   setBlocks() {
-    const binstr = hex2binstr(shapes[this.options.type][this.options.direction].toString(), 16);
+    const binstr = hex2binstr(shapes[this.options.typeId][this.options.direction].toString(), 16);
 
     const unitArray = [binstr.substr(0, 4),
       binstr.substr(4, 4),
@@ -47,9 +47,9 @@ export class TetrisShape {
           const tileOptions: ITileOptions = {
             left: blockLeft,
             top: blockTop,
-            icon: this.options.icon,
+            iconId: this.options.iconId,
             width: this.options.width,
-            color: this.options.color,
+            colorId: this.options.colorId,
           };
           this.blocks[blockId].reset(tileOptions);
           blockId++;
@@ -167,24 +167,24 @@ export class TetrisShape {
   moveDown() {
     this.options.top += tileSize;
     this.setBlocks();
-    this.drawBlocks(TetrisGame.stage);
+    this.drawBlocks(gameScreen.stage);
   }
 
   moveLeft() {
     this.options.left -= tileSize;
     this.setBlocks();
-    this.drawBlocks(TetrisGame.stage);
+    this.drawBlocks(gameScreen.stage);
   }
 
   moveRight() {
     this.options.left += tileSize;
     this.setBlocks();
-    this.drawBlocks(TetrisGame.stage);
+    this.drawBlocks(gameScreen.stage);
   }
 
   rotate() {
     this.options.direction = rotationSequence[this.options.direction];
     this.setBlocks();
-    this.drawBlocks(TetrisGame.stage);
+    this.drawBlocks(gameScreen.stage);
   }
 }

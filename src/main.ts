@@ -1,5 +1,4 @@
-import { Greeter } from './samples/greeter';
+import { TetrisGame } from './tetris/tetris-game';
 
-const g = new Greeter('Derek');
-g.greet();
-
+const tetris = new TetrisGame();
+window.onload = tetris.init;
