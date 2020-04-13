@@ -16,7 +16,7 @@ export class TetrisPreview {
   randomNext() {
     const options = Object.assign({}, this.shapeOptions);
     options.colorId = random(7);
-    options.typeId = 6; //random(7);
+    options.typeId = random(7);
     options.direction = random(4);
     options.left = $constants.xOffsets[options.typeId][options.direction];
     options.top = $constants.yOffsets[options.typeId][options.direction];

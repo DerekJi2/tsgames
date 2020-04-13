@@ -2,8 +2,10 @@ import * as $constants from './utilities/constants';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 import { ETetrisGameStatus } from './models/tetris-game-status.enum';
 import { TetrisPreview } from './tetris-preview';
-import { initialMatrix } from './utilities/initials';
+import { initialMatrix, initialShapeOptions } from './utilities/initials';
 import $ from 'jquery';
+import { TetrisShape } from './tetris-shape';
+import { IShapeOptions } from './models/shape-options.interface';
 
 export class TetrisGame {
   public score = 0;
@@ -20,7 +22,7 @@ export class TetrisGame {
   init() {
     this.showDebugFrm();
     this.showNext();
-
+    this.showSamples();
   }
 
   /**
@@ -72,6 +74,29 @@ export class TetrisGame {
   showDebugFrm() {
     var styleStr = $constants._DEBUG_ ? 'none' : 'block';
     $('#debugfrm').css('display', styleStr);
+  }
+
+  showSamples() {
+    const gridObj = $('#grid');
+
+    let drawStr = '';
+
+    for (var i = 0; i < 7; i++) {
+      const options: IShapeOptions = {
+        typeId: $constants.samplesMatrix.typeId[i],
+        direction: $constants.samplesMatrix.direction[i],
+        colorId: i,
+        iconId: $constants.defaultIconId,
+        left: $constants.samplesMatrix.left[i],
+        top: $constants.samplesMatrix.top[i],
+        width: $constants.tileSize,
+      };
+      const shape = new TetrisShape(options);
+      shape.setBlocks();
+      drawStr += shape.getDrawString();
+    }
+
+    gridObj.html(drawStr);
   }
 
   showNext() { this.preview.draw(); }

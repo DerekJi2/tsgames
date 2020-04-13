@@ -9,7 +9,7 @@ export const rotationSequence = [1, 2, 3, 0];
 export const speedLevels = [500, 450, 400, 350, 300, 250, 200, 150, 100, 70];
 export const bgImages = (('01,02,03,04,05,06,07,08,09,10,11').replace(/(\d\d)/g, 'images/bg$1.jpg')).split(',');
 export const blockIcons = ['Blocks 1', 'Vegetables', 'Blocks 2', 'Blocks 3', 'Office Blocks'];
-export const defaultIconId = 10; // bg11.jpg
+export const defaultIconId = 0; // bg11.jpg
 export const timeInterval = 200; // ms
 export const tileTemplateHtml = '<div style="top:_TOP_px; left:_LEFT_px; background-position:_BPX_px _BPY_px;"></div>';
 
@@ -49,5 +49,12 @@ export const yOffsetO = [10, 10, 10, 10];    // O
 
 export const xOffsets = [ xOffsetI, xOffsetZ, xOffsetS, xOffsetT, xOffsetL, xOffsetJ, xOffsetO];
 export const yOffsets = [ yOffsetI, yOffsetZ, yOffsetS, yOffsetT, yOffsetL, yOffsetJ, yOffsetO];
+
+export const samplesMatrix = {
+  typeId: [1, 0, 3, 2, 4, 5, 6],
+  direction: [1, 0, 1, 2, 1, 0, 0],
+  left: [2 * 28, 6 * 28, 2 * 28, 6 * 28, 2 * 28, 6 * 28, 2 * 28],
+  top: [2 * 28, 2 * 28, 7 * 28, 7 * 28, 11 * 28, 11 * 28, 14 * 28],
+};
 
 export const shapes: TetrisMatrix = [shapeI, shapeZ, shapeS, shapeT, shapeL, shapeJ, shapeO];
