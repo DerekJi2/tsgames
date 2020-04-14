@@ -1,6 +1,7 @@
 import { Key } from './models/key.enum';
 import $ from 'jquery';
 import { ITetrisGame } from './models/tetris-game.interface';
+import { ETetrisGameStatus } from './models/tetris-game-status.enum';
 
 export class TetrisEvents {
   init(tetris: ITetrisGame) {
@@ -10,7 +11,9 @@ export class TetrisEvents {
   }
 
   onKeydown(event: JQuery.KeyDownEvent, tetris: ITetrisGame) {
-    event.preventDefault();
+    if (tetris.status !== ETetrisGameStatus.running) {
+      return;
+    }
 
     const evtObjElem: any = event.target;
     if (evtObjElem.tagName === 'INPUT' || evtObjElem.tagName === 'SELECT') { return; }
@@ -31,8 +34,10 @@ export class TetrisEvents {
         break;
       default:
         console.log(event.key);
-        break;
+        return;
     }
+
+    event.preventDefault();
   }
 
 }
