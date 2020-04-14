@@ -1,4 +1,4 @@
-import { initialTileOptions, initialShapeOptions } from './utilities/initials';
+import { initialShapeOptions } from './utilities/initials';
 import { TetrisTile } from './tetris-title';
 import { IShapeOptions } from './models/shape-options.interface';
 import { hex2binstr } from './utilities/functions';
