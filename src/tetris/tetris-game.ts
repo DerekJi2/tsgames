@@ -10,7 +10,6 @@ import { TetrisConfigs } from './tetris-configs';
 
 export class TetrisGame {
   public score = 0;
-  public keyEvent = window.event;
   public matrix: TetrisMatrix = initialMatrix();
   public intervalId: any;
   public status: ETetrisGameStatus = ETetrisGameStatus.notStarted;
@@ -19,7 +18,7 @@ export class TetrisGame {
   public iconChangeCallback = () => {
     this.showNext();
     this.showSamples();
-  };
+  }
 
   constructor() {
     this.createNewGame();
@@ -49,13 +48,13 @@ export class TetrisGame {
     clearInterval(this.intervalId);
   }
 
-  begin(): void {
+  begin(): void { console.log('begin'); }
+  stop(): void { console.log('stop'); }
+  moveLeft(): void { console.log('move left');  }
+  moveRight(): void { console.log('move right'); }
+  rotate(): void { console.log('rotate'); }
+  moveDown(): void { console.log('move down'); }
 
-  }
-
-  stop(): void {
-
-  }
 
   /**
    *

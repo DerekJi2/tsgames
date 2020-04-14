@@ -17,9 +17,9 @@ export class TetrisTile {
    * @param matrix Tetrix Matrix
    */
   occupyCell(matrix: TetrisMatrix) {
-    var x = Math.floor(this.options.left / this.options.width);
-    var y = Math.floor(this.options.top / this.options.width);
-    var cellVal = this.options.colorId;
+    const x = Math.floor(this.options.left / this.options.width);
+    const y = Math.floor(this.options.top / this.options.width);
+    const cellVal = this.options.colorId;
 
     matrix[y][x] = cellVal;
   }
