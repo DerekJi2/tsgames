@@ -7,8 +7,9 @@ import $ from 'jquery';
 import { TetrisShape } from './tetris-shape';
 import { IShapeOptions } from './models/shape-options.interface';
 import { TetrisConfigs } from './tetris-configs';
+import { ITetrisGame } from './models/tetris-game.interface';
 
-export class TetrisGame {
+export class TetrisGame implements ITetrisGame {
   public score = 0;
   public matrix: TetrisMatrix = initialMatrix();
   public intervalId: any;

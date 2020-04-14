@@ -9,5 +9,5 @@ const events = new TetrisEvents();
 
 document.addEventListener('DOMContentLoaded', () => {
   tetris.init();
-  $(document).on('keydown', (event) => events.onKeydown(event, tetris));
+  events.init(tetris);
 });

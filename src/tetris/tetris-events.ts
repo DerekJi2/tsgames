@@ -1,8 +1,13 @@
-import { TetrisGame } from './tetris-game';
 import { Key } from './models/key.enum';
+import $ from 'jquery';
+import { ITetrisGame } from './models/tetris-game.interface';
 
 export class TetrisEvents {
-  onKeydown(event: JQuery.KeyDownEvent, that: TetrisGame) {
+  init(tetris: ITetrisGame) {
+    $(document).on('keydown', (event) => this.onKeydown(event, tetris));
+  }
+
+  onKeydown(event: JQuery.KeyDownEvent, that: ITetrisGame) {
     event.preventDefault();
 
     const evtObjElem: any = event.target;
