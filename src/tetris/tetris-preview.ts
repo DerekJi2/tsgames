@@ -14,6 +14,9 @@ export class TetrisPreview {
     this.shape = new TetrisShape(this.shapeOptions);
   }
 
+  get ShapeOptions() { return this.shapeOptions; }
+  get TetrisShape() { return this.shape; }
+
   randomNext(configs: ITetrisConfigs) {
     const options = Object.assign({}, this.shapeOptions);
     options.colorId = random(7);

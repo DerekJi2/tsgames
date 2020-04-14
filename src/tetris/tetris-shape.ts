@@ -22,6 +22,11 @@ export class TetrisShape {
   get top() { return this.options.top; }
   get left() { return this.options.left; }
 
+  setPosition(left: number, top: number) {
+    this.options.left = left;
+    this.options.top = top;
+  }
+
   protected initBlocks(): void {
     for (let i = 0; i < 4; i++) {
       this.blocks[i] = new TetrisTile();

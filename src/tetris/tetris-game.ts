@@ -12,7 +12,8 @@ import { ITetrisGame } from './models/tetris-game.interface';
 export class TetrisGame implements ITetrisGame {
   public score = 0;
   public matrix: TetrisMatrix = initialMatrix();
-  public intervalId: any;
+  public intervalId: number;
+  public currentShape: TetrisShape;
   public status: ETetrisGameStatus = ETetrisGameStatus.notStarted;
   public preview = new TetrisPreview();
   public readonly configs = new TetrisConfigs();
@@ -49,7 +50,21 @@ export class TetrisGame implements ITetrisGame {
     clearInterval(this.intervalId);
   }
 
-  begin(): void { console.log('begin'); }
+  begin(tetris: ITetrisGame): void {
+    tetris.createNewGame();
+
+    if (!tetris.currentShape) {
+      tetris.currentShape = new TetrisShape(this.preview.ShapeOptions);
+    }
+    tetris.currentShape.setPosition($constants.tileSize * 3, 0);
+
+    tetris.preview.draw(this.configs);
+
+    tetris.status = ETetrisGameStatus.running;
+
+    tetris.intervalId = window.setInterval(this.moveDown, this.configs.speedIntervals);
+  }
+
   stop(): void { console.log('stop'); }
   moveLeft(): void { console.log('move left');  }
   moveRight(): void { console.log('move right'); }
@@ -60,20 +75,20 @@ export class TetrisGame implements ITetrisGame {
   /**
    *
    */
-  toggleGameStatus(): void {
+  toggleGameStatus(tetris: ITetrisGame): void {
     const button = $($constants.domSelectors.stopButton);
-    switch (this.status) {
+    switch (tetris.status) {
       case ETetrisGameStatus.notStarted:
         if (button.val() === 'Stop') {
           break;
         }
         button.text('Stop');
-        this.begin();
+        tetris.begin(tetris);
         break;
 
       case ETetrisGameStatus.running:
         button.text('Start');
-        this.stop();
+        tetris.stop();
         break;
 
       default:

@@ -5,6 +5,8 @@ import { ITetrisGame } from './models/tetris-game.interface';
 export class TetrisEvents {
   init(tetris: ITetrisGame) {
     $(document).on('keydown', (event) => this.onKeydown(event, tetris));
+
+    $('#startBtn').on('click', () => tetris.toggleGameStatus(tetris));
   }
 
   onKeydown(event: JQuery.KeyDownEvent, tetris: ITetrisGame) {
