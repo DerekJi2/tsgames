@@ -93,7 +93,6 @@ export class TetrisShape {
     for (let i = 0; i < this.tilesNumber; i++) {
       html += this.blocks[i].getHtml();
     }
-    console.log(html);
     obj.html(html);
   }
 
