@@ -6,6 +6,7 @@ import { initialMatrix, initialShapeOptions } from './utilities/initials';
 import $ from 'jquery';
 import { TetrisShape } from './tetris-shape';
 import { IShapeOptions } from './models/shape-options.interface';
+import { TetrisConfigs } from './tetris-configs';
 
 export class TetrisGame {
   public score = 0;
@@ -14,15 +15,24 @@ export class TetrisGame {
   public intervalId: any;
   public status: ETetrisGameStatus = ETetrisGameStatus.notStarted;
   public preview = new TetrisPreview();
+  public readonly configs = new TetrisConfigs();
+  public iconChangeCallback = () => {
+    this.showNext();
+    this.showSamples();
+  };
 
   constructor() {
     this.createNewGame();
+
+    this.configs.iconChangeCallback = this.iconChangeCallback;
   }
 
   init() {
     this.showDebugFrm();
     this.showNext();
     this.showSamples();
+
+    this.configs.initDropdownLists();
   }
 
   /**
@@ -30,7 +40,7 @@ export class TetrisGame {
    */
   createNewGame(): void {
     this.score = 0;
-    $constants.gameScreen.score.text('0');
+    $($constants.domSelectors.score).text('0');
   }
 
   /**
@@ -52,17 +62,18 @@ export class TetrisGame {
    *
    */
   toggleGameStatus(): void {
+    const button = $($constants.domSelectors.stopButton);
     switch (this.status) {
       case ETetrisGameStatus.notStarted:
-        if ($constants.gameScreen.stopButton.val() === 'Stop') {
+        if (button.val() === 'Stop') {
           break;
         }
-        $constants.gameScreen.stopButton.text('Stop');
+        button.text('Stop');
         this.begin();
         break;
 
       case ETetrisGameStatus.running:
-        $constants.gameScreen.stopButton.text('Start');
+        button.text('Start');
         this.stop();
         break;
 
@@ -72,7 +83,7 @@ export class TetrisGame {
   }
 
   showDebugFrm() {
-    var styleStr = $constants._DEBUG_ ? 'none' : 'block';
+    const styleStr = $constants._DEBUG_ ? 'none' : 'block';
     $('#debugfrm').css('display', styleStr);
   }
 
@@ -81,12 +92,12 @@ export class TetrisGame {
 
     let drawStr = '';
 
-    for (var i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i++) {
       const options: IShapeOptions = {
         typeId: $constants.samplesMatrix.typeId[i],
         direction: $constants.samplesMatrix.direction[i],
         colorId: i,
-        iconId: $constants.defaultIconId,
+        iconId: this.configs.iconId,
         left: $constants.samplesMatrix.left[i],
         top: $constants.samplesMatrix.top[i],
         width: $constants.tileSize,
@@ -99,5 +110,5 @@ export class TetrisGame {
     gridObj.html(drawStr);
   }
 
-  showNext() { this.preview.draw(); }
+  showNext() { this.preview.draw(this.configs); }
 }

@@ -53,6 +53,8 @@ module.exports = {
     },
 
     devtool: 'cheap-module-source-map',
-    devServer: {}
+    devServer: {
+        disableHostCheck: true
+    }
 };
 

@@ -1,5 +1,4 @@
 import { TetrisMatrix } from '../models/tetris-matrix.type';
-import $ from 'jquery';
 
 export const _DEBUG_ = true;
 export const tileSize = 28;
@@ -7,20 +6,20 @@ export const screenMaxY = 20;
 export const screenMaxX = 10;
 export const rotationSequence = [1, 2, 3, 0];
 export const speedLevels = [500, 450, 400, 350, 300, 250, 200, 150, 100, 70];
-export const bgImages = (('01,02,03,04,05,06,07,08,09,10,11').replace(/(\d\d)/g, 'images/bg$1.jpg')).split(',');
+export const bgImages = (('01,02,03,04,05,06,07,08,09,10,11').replace(/(\d\d)/g, '/assets/images/bg$1.jpg')).split(',');
 export const blockIcons = ['Blocks 1', 'Vegetables', 'Blocks 2', 'Blocks 3', 'Office Blocks'];
 export const defaultIconId = 0; // bg11.jpg
 export const timeInterval = 200; // ms
 export const tileTemplateHtml = '<div style="top:_TOP_px; left:_LEFT_px; background-position:_BPX_px _BPY_px;"></div>';
 
-export const gameScreen = {
-  debug: $('#debugfrm'),
-  grid: $('grid'),
-  stage: $('stage'),
-  gameover: $('gameover'),
-  nextBlock: $('nextBlock'),
-  score: $('score'),
-  stopButton: $('stopBtn'),
+export const domSelectors = {
+  debug: '#debugfrm',
+  grid: '#grid',
+  stage: '#stage',
+  gameover: '#gameover',
+  nextBlock: '#nextBlock',
+  score: '#score',
+  stopButton: '#stopBtn',
 };
 
 export const shapeI = [0xf000, 0x4444, 0xf000, 0x4444];

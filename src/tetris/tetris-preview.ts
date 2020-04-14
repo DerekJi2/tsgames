@@ -4,6 +4,7 @@ import { initialShapeOptions } from './utilities/initials';
 import { random } from './utilities/functions';
 import * as $constants from './utilities/constants';
 import $ from 'jquery';
+import { ITetrisConfigs } from './models/tetris-configs.interface';
 
 export class TetrisPreview {
   protected shape: TetrisShape;
@@ -13,20 +14,21 @@ export class TetrisPreview {
     this.shape = new TetrisShape(this.shapeOptions);
   }
 
-  randomNext() {
+  randomNext(configs: ITetrisConfigs) {
     const options = Object.assign({}, this.shapeOptions);
     options.colorId = random(7);
     options.typeId = random(7);
     options.direction = random(4);
+    options.iconId = configs.iconId;
     options.left = $constants.xOffsets[options.typeId][options.direction];
     options.top = $constants.yOffsets[options.typeId][options.direction];
 
     this.shape = new TetrisShape(options);
   }
 
-  draw() {
-    this.randomNext();
-    $constants.gameScreen.nextBlock.html('');
+  draw(configs: ITetrisConfigs) {
+    this.randomNext(configs);
+    $($constants.domSelectors.nextBlock).html('');
     this.shape.drawBlocks($('#nextBlock'));
   }
 }

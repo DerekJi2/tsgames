@@ -17,6 +17,8 @@ export class TetrisShape {
 
   reset(options: IShapeOptions) { this.options = options; }
 
+  protected get stage(): JQuery<HTMLElement> { return $($constants.domSelectors.stage); }
+
   get top() { return this.options.top; }
   get left() { return this.options.left; }
 
@@ -153,7 +155,7 @@ export class TetrisShape {
   rotateAllowed(matrix: TetrisMatrix): boolean {
     const options = Object.assign({}, this.options);
     options.direction = $constants.rotationSequence[this.options.direction];
-    var newShape = new TetrisShape(options);
+    const newShape = new TetrisShape(options);
 
     for (let i = 0; i < 4; i++) {
       const nextLeft = Math.floor(newShape.blocks[i].left / $constants.tileSize);
@@ -168,24 +170,24 @@ export class TetrisShape {
   moveDown() {
     this.options.top += $constants.tileSize;
     this.setBlocks();
-    this.drawBlocks($constants.gameScreen.stage);
+    this.drawBlocks(this.stage);
   }
 
   moveLeft() {
     this.options.left -= $constants.tileSize;
     this.setBlocks();
-    this.drawBlocks($constants.gameScreen.stage);
+    this.drawBlocks(this.stage);
   }
 
   moveRight() {
     this.options.left += $constants.tileSize;
     this.setBlocks();
-    this.drawBlocks($constants.gameScreen.stage);
+    this.drawBlocks(this.stage);
   }
 
   rotate() {
     this.options.direction = $constants.rotationSequence[this.options.direction];
     this.setBlocks();
-    this.drawBlocks($constants.gameScreen.stage);
+    this.drawBlocks(this.stage);
   }
 }
