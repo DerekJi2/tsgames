@@ -28,7 +28,6 @@ export class TetrisGame {
   }
 
   init() {
-    this.showDebugFrm();
     this.showNext();
     this.showSamples();
 
@@ -80,11 +79,6 @@ export class TetrisGame {
       default:
         break;
     }
-  }
-
-  showDebugFrm() {
-    const styleStr = $constants._DEBUG_ ? 'none' : 'block';
-    $('#debugfrm').css('display', styleStr);
   }
 
   showSamples() {
