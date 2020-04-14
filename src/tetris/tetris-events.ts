@@ -30,7 +30,7 @@ export class TetrisEvents {
         tetris.rotate();
         break;
       case Key.DownArrow:	// DownKey
-        tetris.moveDown();
+        tetris.moveDown(tetris);
         break;
       default:
         console.log(event.key);

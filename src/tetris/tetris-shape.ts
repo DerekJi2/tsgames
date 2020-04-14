@@ -1,8 +1,9 @@
+import * as $constants from './utilities/constants';
+import $ from 'jquery';
 import { initialShapeOptions } from './utilities/initials';
 import { TetrisTile } from './tetris-title';
 import { IShapeOptions } from './models/shape-options.interface';
 import { hex2binstr } from './utilities/functions';
-import * as $constants from './utilities/constants';
 import { ITileOptions } from './models/tile-options.interface';
 import { TetrisMatrix } from './models/tetris-matrix.type';
 
@@ -99,6 +100,12 @@ export class TetrisShape {
       html += this.blocks[i].getHtml();
     }
     obj.html(html);
+  }
+
+  occupyCells(matrix: TetrisMatrix) {
+    for (var i = 0; i < 4; i++ ) {
+      this.blocks[i].occupyCell(matrix);
+    }
   }
 
   /**
