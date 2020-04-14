@@ -1,0 +1,9 @@
+version: 1.0.{build}
+install:
+- ps: npm install --loglevel error
+cache: node_modules
+build_script:
+- ps: >-
+    dir C:\projects\tsgames
+
+    npm run build
