@@ -7,7 +7,7 @@ export class TetrisEvents {
     $(document).on('keydown', (event) => this.onKeydown(event, tetris));
   }
 
-  onKeydown(event: JQuery.KeyDownEvent, that: ITetrisGame) {
+  onKeydown(event: JQuery.KeyDownEvent, tetris: ITetrisGame) {
     event.preventDefault();
 
     const evtObjElem: any = event.target;
@@ -15,17 +15,17 @@ export class TetrisEvents {
 
     switch (event.key) {
       case Key.LeftArrow:	// LeftKey
-        that.moveLeft();
+        tetris.moveLeft();
         break;
       case Key.RightArrow:	// RightKey
-        that.moveRight();
+        tetris.moveRight();
         break;
       case Key.UpArrow:	// UpKey
       case Key.Space:	// SPACE
-        that.rotate();
+        tetris.rotate();
         break;
       case Key.DownArrow:	// DownKey
-        that.moveDown();
+        tetris.moveDown();
         break;
       default:
         console.log(event.key);
