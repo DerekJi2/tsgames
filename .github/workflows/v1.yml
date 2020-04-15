@@ -39,5 +39,5 @@ jobs:
       run: cp src/assets dist/ -rf
       
     # Deploy 
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.4.8
+    #- name: Deploy to GitHub Pages
+    #  uses: JamesIves/github-pages-deploy-action@3.4.8
