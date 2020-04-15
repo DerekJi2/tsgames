@@ -23,15 +23,17 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: Run `npm install`
+    - name: Run 'npm install'
       run: npm install
 
     # Runs a single command using the runners shell
-    - name: Run `npm build`
-      run: npm build
+    - name: Run 'npm run build'
+      run: npm run build
       
-    # Runs a set of commands using the runners shell
+    # Runs a single command using the runners shell
+    - name: Copy index.html
+      run: cp src/index.html dist/ -f
+      
+    # Runs a single command using the runners shell
     - name: Copy files
-      run: |
-        cp src/index.html dist/,
-        cp src/assets dist/ -rf
+      run: cp src/assets dist/ -rf
