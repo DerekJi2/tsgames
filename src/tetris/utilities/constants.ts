@@ -22,6 +22,10 @@ export const domSelectors = {
   stopButton: '#stopBtn',
 };
 
+export const buttonSelectors = {
+  start: '#startBtn',
+};
+
 export const shapeI = [0xf000, 0x4444, 0xf000, 0x4444];
 export const shapeZ = [0x6c00, 0x4620, 0x6c00, 0x4620];   // Z: (H, V, H, V)
 export const shapeS = [0xc600, 0x2640, 0xc600, 0x2640];   // S: (H, V, H, V)

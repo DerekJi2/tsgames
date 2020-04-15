@@ -9,6 +9,9 @@ import { TetrisShape } from './tetris-shape';
 import { IShapeOptions } from './models/shape-options.interface';
 import { TetrisConfigs } from './tetris-configs';
 import { ITetrisGame } from './models/tetris-game.interface';
+import { TetrisSamples } from './tetris-samples';
+import { ITetrisSamples } from './models/tetris-samples.interface';
+import { ITetrisConfigs } from './models/tetris-configs.interface';
 
 export class TetrisGame implements ITetrisGame {
   public score = 0;
@@ -17,10 +20,11 @@ export class TetrisGame implements ITetrisGame {
   public currentShape: TetrisShape;
   public status: ETetrisGameStatus = ETetrisGameStatus.notStarted;
   public preview = new TetrisPreview();
-  public readonly configs = new TetrisConfigs();
+  public readonly configs: TetrisConfigs = new TetrisConfigs();
+  public readonly samples: ITetrisSamples = new TetrisSamples(this.configs);
   public iconChangeCallback = () => {
     this.showNext();
-    this.showSamples();
+    this.samples.show();
   }
 
   constructor() {
@@ -31,7 +35,7 @@ export class TetrisGame implements ITetrisGame {
 
   init() {
     this.showNext();
-    this.showSamples();
+    this.samples.show();
 
     this.configs.initDropdownLists();
   }
@@ -53,6 +57,7 @@ export class TetrisGame implements ITetrisGame {
 
   begin(tetris: ITetrisGame): void {
     tetris.createNewGame();
+    tetris.samples.hide();
 
     if (!tetris.currentShape) {
       tetris.currentShape = new TetrisShape(this.preview.ShapeOptions);
@@ -67,9 +72,42 @@ export class TetrisGame implements ITetrisGame {
   }
 
   stop(): void { console.log('stop'); }
-  moveLeft(): void { console.log('move left');  }
-  moveRight(): void { console.log('move right'); }
-  rotate(): void { console.log('rotate'); }
+  moveLeft(tetris: ITetrisGame): void {
+    if (tetris.status !== ETetrisGameStatus.running) {
+      return;
+    }
+
+    if (tetris.currentShape.moveLeftAllowed(tetris.matrix) === false) {
+      return;
+    }
+
+    tetris.currentShape.moveLeft();
+  }
+
+  moveRight(tetris: ITetrisGame): void {
+    if (tetris.status !== ETetrisGameStatus.running) {
+      return;
+    }
+
+    if (tetris.currentShape.moveRightAllowed(tetris.matrix) === false) {
+      return;
+    }
+
+    tetris.currentShape.moveRight();
+  }
+
+  rotate(tetris: ITetrisGame): void {
+    if (tetris.status !== ETetrisGameStatus.running) {
+      return;
+    }
+
+    if (tetris.currentShape.rotateAllowed(tetris.matrix) === false) {
+      return;
+    }
+
+    tetris.currentShape.rotate();
+  }
+
   moveDown(tetris: ITetrisGame): void {
     if (tetris.currentShape.moveDownAllowed(tetris.matrix)) {
       tetris.currentShape.moveDown();
@@ -92,8 +130,8 @@ export class TetrisGame implements ITetrisGame {
     // 2.2 ��Ϸ�������ж�
     if (tetris.isGameOver()) {
       stop();
-      // E("startBtn").value = "��ʼ";
-      // setTimeout(showGameOver, 500);
+      $($constants.buttonSelectors.start).val('Start');
+      setTimeout(() => tetris.showGameOver(tetris), 500);
 
       return;
     }
@@ -101,12 +139,20 @@ export class TetrisGame implements ITetrisGame {
     // // 3. ����nextBlockָ���������趨�µ�shape
     // this.currentShape.sets(g_nextShapeParams);
     // this.currentShape.sets("ut:0_ul:" + 28*3);
+    tetris.currentShape.reset(tetris.preview.ShapeOptions);
+    tetris.currentShape.setPosition($constants.tileSize * 3, 0);
 
     // // 4����Ԥ��ͼ�����ɲ���ʾ��һ��shape
     // var objNextFrm = new ViewNextFrameClass("nextBlock");
     // //objNextFrm = g_game.objNextFrm;
     // objNextFrm.randomNext();
     // objNextFrm.draw();
+    tetris.preview.randomNext(tetris.configs);
+    tetris.preview.draw(tetris.configs);
+  }
+
+  showGameOver(tetris: ITetrisGame) {
+
   }
 
   deleteOccupiedLines() {
@@ -193,29 +239,5 @@ export class TetrisGame implements ITetrisGame {
         break;
     }
   }
-
-  showSamples() {
-    const gridObj = $('#grid');
-
-    let drawStr = '';
-
-    for (let i = 0; i < 7; i++) {
-      const options: IShapeOptions = {
-        typeId: $constants.samplesMatrix.typeId[i],
-        direction: $constants.samplesMatrix.direction[i],
-        colorId: i,
-        iconId: this.configs.iconId,
-        left: $constants.samplesMatrix.left[i],
-        top: $constants.samplesMatrix.top[i],
-        width: $constants.tileSize,
-      };
-      const shape = new TetrisShape(options);
-      shape.setBlocks();
-      drawStr += shape.getDrawString();
-    }
-
-    gridObj.html(drawStr);
-  }
-
   showNext() { this.preview.draw(this.configs); }
 }

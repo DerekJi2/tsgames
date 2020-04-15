@@ -1,8 +1,8 @@
 export enum Key {
-  Space = 'Space',
+  Space = ' ',
 
-  LeftArrow = 'LeftArrow',
-  UpArrow = 'UpArrow',
-  RightArrow = 'RightArrow',
-  DownArrow = 'DownArrow',
+  LeftArrow = 'ArrowLeft',
+  UpArrow = 'ArrowUp',
+  RightArrow = 'ArrowRight',
+  DownArrow = 'ArrowDown',
 }

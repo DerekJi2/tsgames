@@ -2,12 +2,13 @@ import { Key } from './models/key.enum';
 import $ from 'jquery';
 import { ITetrisGame } from './models/tetris-game.interface';
 import { ETetrisGameStatus } from './models/tetris-game-status.enum';
+import * as $constants from './utilities/constants';
 
 export class TetrisEvents {
   init(tetris: ITetrisGame) {
     $(document).on('keydown', (event) => this.onKeydown(event, tetris));
 
-    $('#startBtn').on('click', () => tetris.toggleGameStatus(tetris));
+    $($constants.buttonSelectors.start).on('click', () => tetris.toggleGameStatus(tetris));
   }
 
   onKeydown(event: JQuery.KeyDownEvent, tetris: ITetrisGame) {
@@ -20,14 +21,14 @@ export class TetrisEvents {
 
     switch (event.key) {
       case Key.LeftArrow:	// LeftKey
-        tetris.moveLeft();
+        tetris.moveLeft(tetris);
         break;
       case Key.RightArrow:	// RightKey
-        tetris.moveRight();
+        tetris.moveRight(tetris);
         break;
       case Key.UpArrow:	// UpKey
       case Key.Space:	// SPACE
-        tetris.rotate();
+        tetris.rotate(tetris);
         break;
       case Key.DownArrow:	// DownKey
         tetris.moveDown(tetris);
