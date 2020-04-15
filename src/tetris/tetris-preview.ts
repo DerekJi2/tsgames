@@ -14,8 +14,9 @@ export class TetrisPreview {
     this.shape = new TetrisShape(this.shapeOptions);
   }
 
-  get ShapeOptions() { return this.shapeOptions; }
-  get TetrisShape() { return this.shape; }
+  get panel(): JQuery<HTMLElement> { return $($constants.domSelectors.nextBlock); }
+  get ShapeOptions(): IShapeOptions { return this.shapeOptions; }
+  get TetrisShape(): TetrisShape { return this.shape; }
 
   randomNext(configs: ITetrisConfigs) {
     const options = Object.assign({}, this.shapeOptions);
@@ -26,12 +27,13 @@ export class TetrisPreview {
     options.left = $constants.xOffsets[options.typeId][options.direction];
     options.top = $constants.yOffsets[options.typeId][options.direction];
 
+    this.shapeOptions = options;
     this.shape = new TetrisShape(options);
   }
 
   draw(configs: ITetrisConfigs) {
     this.randomNext(configs);
     $($constants.domSelectors.nextBlock).html('');
-    this.shape.drawBlocks($('#nextBlock'));
+    this.shape.drawBlocks(this.panel);
   }
 }

@@ -8,14 +8,15 @@ import { ITetrisSamples } from './models/tetris-samples.interface';
 
 
 export class TetrisSamples implements ITetrisSamples {
-  constructor(protected configs: ITetrisConfigs) {}
+  constructor(protected configs: ITetrisConfigs) {
+  }
+
+  get panel(): JQuery<HTMLElement> { return $($constants.domSelectors.backgroundGrid); }
 
   show() {
-    const gridObj = $('#grid');
+    let html = '';
 
-    let drawStr = '';
-
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < $constants.shapes.length; i++) {
       const options: IShapeOptions = {
         typeId: $constants.samplesMatrix.typeId[i],
         direction: $constants.samplesMatrix.direction[i],
@@ -27,14 +28,11 @@ export class TetrisSamples implements ITetrisSamples {
       };
       const shape = new TetrisShape(options);
       shape.setBlocks();
-      drawStr += shape.getDrawString();
+      html += shape.getHtml();
     }
 
-    gridObj.html(drawStr);
+    this.panel.html(html);
   }
 
-  hide() {
-    const gridObj = $('#grid');
-    gridObj.html('');
-  }
+  hide() { this.panel.html(''); }
 }

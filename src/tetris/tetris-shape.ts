@@ -18,7 +18,7 @@ export class TetrisShape {
 
   reset(options: IShapeOptions) { this.options = options; }
 
-  protected get stage(): JQuery<HTMLElement> { return $($constants.domSelectors.stage); }
+  protected get stage(): JQuery<HTMLElement> { return $($constants.domSelectors.activeStage); }
 
   get top() { return this.options.top; }
   get left() { return this.options.left; }
@@ -69,7 +69,7 @@ export class TetrisShape {
   /**
    * Get HTML
    */
-  getDrawString(): string {
+  getHtml(): string {
     let html = '';
 
     for (let i = 0; i < this.tilesNumber; i++) {
@@ -167,6 +167,7 @@ export class TetrisShape {
     const options = Object.assign({}, this.options);
     options.direction = $constants.rotationSequence[this.options.direction];
     const newShape = new TetrisShape(options);
+    newShape.setBlocks();
 
     for (let i = 0; i < 4; i++) {
       const nextLeft = Math.floor(newShape.blocks[i].left / $constants.tileSize);

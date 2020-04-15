@@ -5,9 +5,11 @@ import { TetrisMatrix } from './tetris-matrix.type';
 import { ITetrisSamples } from './tetris-samples.interface';
 import { ITetrisConfigs } from './tetris-configs.interface';
 import { TetrisConfigs } from '../tetris-configs';
+import { ITetrisGameover } from './tetris-gameover.interface';
 
 export interface ITetrisGame {
 
+  score: number;
   status: ETetrisGameStatus;
   preview: TetrisPreview;
   currentShape: TetrisShape;
@@ -15,11 +17,14 @@ export interface ITetrisGame {
   intervalId: number;
   configs: TetrisConfigs;
   samples: ITetrisSamples;
+  gameover: ITetrisGameover;
 
   init(): void;
   createNewGame(): void;
-  isGameOver(): boolean;
-  deleteOccupiedLines(): void;
+
+  removeRow(matrix: TetrisMatrix, lineNo: number): void;
+  removeFullRowsAndScore(tetris: ITetrisGame): void;
+  redrawGridByCell(tetris: ITetrisGame): void;
 
   begin(tetris: ITetrisGame): void;
   stop(): void;
@@ -32,6 +37,5 @@ export interface ITetrisGame {
   iconChangeCallback(): void;
   toggleGameStatus(tetris: ITetrisGame): void;
 
-  showGameOver(tetris: ITetrisGame): void;
 
 }

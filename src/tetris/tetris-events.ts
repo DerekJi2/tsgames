@@ -8,7 +8,7 @@ export class TetrisEvents {
   init(tetris: ITetrisGame) {
     $(document).on('keydown', (event) => this.onKeydown(event, tetris));
 
-    $($constants.buttonSelectors.start).on('click', () => tetris.toggleGameStatus(tetris));
+    $($constants.domSelectors.startButton).on('click', () => tetris.toggleGameStatus(tetris));
   }
 
   onKeydown(event: JQuery.KeyDownEvent, tetris: ITetrisGame) {

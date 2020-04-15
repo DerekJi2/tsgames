@@ -14,16 +14,17 @@ export const tileTemplateHtml = '<div style="top:_TOP_px; left:_LEFT_px; backgro
 
 export const domSelectors = {
   debug: '#debugfrm',
-  grid: '#grid',
-  stage: '#stage',
+  backgroundGrid: '#grid',
+  activeStage: '#stage',
   gameover: '#gameover',
   nextBlock: '#nextBlock',
   score: '#score',
-  stopButton: '#stopBtn',
+  startButton: '#startBtn',
 };
 
-export const buttonSelectors = {
-  start: '#startBtn',
+export const templates = {
+  tile: '#tile-template-html',
+  gameover: '#gameover-template-html',
 };
 
 export const shapeI = [0xf000, 0x4444, 0xf000, 0x4444];
