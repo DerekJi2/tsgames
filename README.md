@@ -1,6 +1,6 @@
 TypeScript Games
 
-![Build Status](https://ci.appveyor.com/api/projects/status/github/derektoop/tsgames)
+![CI](https://github.com/DerekToop/tsgames/workflows/CI/badge.svg)
 ------------------------------
 
 The new versions with Typescripts for [JsGames](https://github.com/DerekToop/jsgames)
