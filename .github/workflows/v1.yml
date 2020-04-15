@@ -37,3 +37,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Copy src/assets to dist
       run: cp src/assets dist/ -rf
+      
+    # Deploy 
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.4.8
