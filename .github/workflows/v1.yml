@@ -28,7 +28,7 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run 'npm run build'
-      run: npm run build
+      run: npm run build.prod
       
     # Runs a single command using the runners shell
     - name: Copy src/index.html to dist
