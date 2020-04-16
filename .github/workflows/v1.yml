@@ -22,27 +22,27 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # # Runs a single command using the runners shell
-    # - name: Run 'npm install'
-    #   run: npm install
+    # Runs a single command using the runners shell
+    - name: Run 'npm install'
+      run: npm install
 
-    # # Runs a single command using the runners shell
-    # - name: Run 'npm run build'
-    #   run: npm run build
+    # Runs a single command using the runners shell
+    - name: Run 'npm run build'
+      run: npm run build
       
-    # # Runs a single command using the runners shell
-    # - name: Copy src/index.html to dist
-    #   run: cp src/index.html dist/ -f
+    # Runs a single command using the runners shell
+    - name: Copy src/index.html to dist
+      run: cp src/index.html dist/ -f
       
-    # # Runs a single command using the runners shell
-    # - name: Copy src/assets to dist
-    #   run: cp src/assets dist/ -rf
+    # Runs a single command using the runners shell
+    - name: Copy src/assets to dist
+      run: cp src/assets dist/ -rf
       
     # Deploy 
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.4.8
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: build
-        BUILD_SCRIPT: npm install && npm run build && cp src/index.html dist/ -f && cp src/assets dist/ -rf
+    # - name: Deploy to GitHub Pages
+    #   uses: JamesIves/github-pages-deploy-action@3.4.8
+    #   env:
+    #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    #     BRANCH: gh-pages
+    #     FOLDER: build
+    #     BUILD_SCRIPT: npm install && npm run build && cp src/index.html dist/ -f && cp src/assets dist/ -rf
