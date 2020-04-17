@@ -10,6 +10,7 @@
     
     <link type="text/css" rel="stylesheet" href="assets/css/tetris-css2.css" />
     <link type="text/css" rel="stylesheet" href="assets/css/tetris-debug.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="main.bundle.js"></script>
 </head>
 <body   style="overflow-x:hidden;overflow-y:auto">
@@ -33,16 +34,12 @@
           </p>
           <!-- 3rd element: Button to control start/pause/end -->
           <button id="startBtn" class="frmButton">Start</button>
-          <!--  Test Button
-          <button id="testBtn" class="frmButton" onclick="test();">Test</button>
-          <button id="stopBtn" class="frmButton" onclick="clickStopButton();">Stop</button>
-          -->
-  
+
           <!-- 4th element: tabFrame to control parameters/details -->
           <div class='tab-box'>
               <div id="tab-nav" class="tab-nav">
-                  <span class="tab-menu   selected" id="tm1"><a href="#" onclick="changeTab(1)" onFocus="this.blur()">Setup</a></span>
-                  <span class="tab-menu unselected" id="tm2"><a href="#" onclick="changeTab(2)" onFocus="this.blur()">About</a></span>
+                  <span class="tab-menu   selected" id="tm1"><a href="javascript:void(0);" onFocus="this.blur()">Setup</a></span>
+                  <span class="tab-menu unselected" id="tm2"><a href="javascript:void(0);" onFocus="this.blur()">About</a></span>
               </div>
   
               <div class="tab-content  show" id="tc1"><br />
@@ -67,8 +64,13 @@
   
           <!-- 5th element: tabFrame to control parameters/details --><br />
           <div class="plaintxt">
-              <p>Typescript Tetris<br /><br />
-              Author: <a href="mailto:syfool@hotmail.com">syfool</a></p>
+            <div>Author: <a href="mailto:syfool@hotmail.com">Derek Ji</a></div>
+            <div>
+              <a href="https://www.facebook.com/zhigangji" target="_blank"><i class="fa fa-facebook-square">&nbsp;</i></a>
+              <a href="https://twitter.com/zil_ji" target="_blank"><i class="fa fa-twitter-square">&nbsp;</i></a>
+              <a href="https://www.linkedin.com/in/derek-ji-114004168" target="_blank"><i class="fa fa-linkedin-square">&nbsp;</i></a>
+              <a href="https://github.com/derekji" target="_blank"><i class="fa fa-github-square">&nbsp;</i></a>
+            </div>
           </div>
       </div>
   

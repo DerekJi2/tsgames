@@ -20,6 +20,8 @@ export const domSelectors = {
   nextBlock: '#nextBlock',
   score: '#score',
   startButton: '#startBtn',
+  tabMenuSetup: '#tm1',
+  tabMenuAbout: '#tm2',
 };
 
 export const templates = {

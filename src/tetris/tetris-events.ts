@@ -3,12 +3,17 @@ import $ from 'jquery';
 import { ITetrisGame } from './models/tetris-game.interface';
 import { ETetrisGameStatus } from './models/tetris-game-status.enum';
 import * as $constants from './utilities/constants';
+import { TabsComponent } from './tabs.component';
+import { ITabsComponent } from './models/tabs-component.interface';
 
 export class TetrisEvents {
-  init(tetris: ITetrisGame) {
+  init(tetris: ITetrisGame, tabsComponent: ITabsComponent) {
     $(document).on('keydown', (event) => this.onKeydown(event, tetris));
 
-    $($constants.domSelectors.startButton).on('click', () => tetris.toggleGameStatus(tetris));
+    $($constants.domSelectors.startButton).on('click', () => tetris.onControlButtonClick(tetris));
+
+    $($constants.domSelectors.tabMenuSetup).on('click', () => tabsComponent.switchTo(tabsComponent, 1));
+    $($constants.domSelectors.tabMenuAbout).on('click', () => tabsComponent.switchTo(tabsComponent, 2));
   }
 
   onKeydown(event: JQuery.KeyDownEvent, tetris: ITetrisGame) {

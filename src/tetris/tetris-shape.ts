@@ -26,6 +26,9 @@ export class TetrisShape {
   setPosition(left: number, top: number) {
     this.options.left = left;
     this.options.top = top;
+
+    this.setBlocks();
+    this.drawBlocks(this.stage);
   }
 
   protected initBlocks(): void {

@@ -153,9 +153,7 @@ export class TetrisGame implements ITetrisGame {
 
     // Game Over
     if (tetris.gameover.check(tetris.matrix)) {
-      stop();
-      $($constants.domSelectors.startButton).val('Start');
-      setTimeout(() => tetris.gameover.show(), 500);
+      tetris.gameover.onGameover(tetris);
 
       return;
     }
@@ -179,7 +177,6 @@ export class TetrisGame implements ITetrisGame {
       // Take the next shape from the preview panel
       tetris.currentShape.reset(tetris.preview.ShapeOptions);
       tetris.currentShape.setPosition($constants.tileSize * 3, 0);
-      tetris.currentShape.moveDown();
 
       // Re-generate the next shape and display it in the preview panel
       tetris.preview.randomNext(tetris.configs);
@@ -208,11 +205,11 @@ export class TetrisGame implements ITetrisGame {
    * @param tetris ITetrisGame
    */
   removeFullRowsAndScore(tetris: ITetrisGame) {
-    var redrawRequired = false;
+    let redrawRequired = false;
 
     /**/
-    var numberOfLinesDeleted = 0;
-    var i = $constants.screenMaxY - 1;
+    let numberOfLinesDeleted = 0;
+    let i = $constants.screenMaxY - 1;
     while (i > 0) {
       var str = tetris.matrix[i].toString();
       if ( str.indexOf('-1') < 0 ) {
@@ -268,24 +265,44 @@ export class TetrisGame implements ITetrisGame {
     gridObj.html(redrawStr);
   }
 
+  /**
+   * Pause the game
+   * @param tetris ITetrisGame
+   */
+  pause(tetris: ITetrisGame) {
+    clearInterval(tetris.intervalId);
+    tetris.status = ETetrisGameStatus.paused;
+  }
+
+  /**
+   * Resume the game (from the previous status of PAUSE)
+   * @param tetris ITetrisGame
+   */
+  resume(tetris: ITetrisGame) {
+    tetris.status = ETetrisGameStatus.running;
+    tetris.intervalId = window.setInterval(() => this.moveDown(tetris), this.configs.speedIntervals);
+  }
+
 
   /**
    *
    */
-  toggleGameStatus(tetris: ITetrisGame): void {
+  onControlButtonClick(tetris: ITetrisGame): void {
     const button = $($constants.domSelectors.startButton);
     switch (tetris.status) {
       case ETetrisGameStatus.notStarted:
-        if (button.val() === 'Stop') {
-          break;
-        }
-        button.text('Stop');
+        button.text('Pause');
         tetris.begin(tetris);
         break;
 
+      case ETetrisGameStatus.paused:
+        button.text('Pause');
+        tetris.resume(tetris);
+        break;
+
       case ETetrisGameStatus.running:
-        button.text('Start');
-        tetris.stop();
+        button.text('Resume');
+        tetris.pause(tetris);
         break;
 
       default:

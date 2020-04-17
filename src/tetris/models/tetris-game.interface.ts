@@ -27,6 +27,8 @@ export interface ITetrisGame {
   redrawGridByCell(tetris: ITetrisGame): void;
 
   begin(tetris: ITetrisGame): void;
+  pause(tetris: ITetrisGame): void;
+  resume(tetris: ITetrisGame): void;
   stop(): void;
 
   moveLeft(tetris: ITetrisGame): void;
@@ -35,7 +37,7 @@ export interface ITetrisGame {
   rotate(tetris: ITetrisGame): void;
 
   iconChangeCallback(): void;
-  toggleGameStatus(tetris: ITetrisGame): void;
+  onControlButtonClick(tetris: ITetrisGame): void;
 
 
 }

@@ -2,6 +2,7 @@ import * as $constants from './utilities/constants';
 import $ from 'jquery';
 import { ITetrisGameover } from './models/tetris-gameover.interface';
 import { TetrisMatrix } from './models/tetris-matrix.type';
+import { ITetrisGame } from './models/tetris-game.interface';
 
 export class TetrisGameover implements ITetrisGameover {
 
@@ -14,7 +15,11 @@ export class TetrisGameover implements ITetrisGameover {
   get panel(): JQuery<HTMLElement> { return $($constants.domSelectors.gameover); }
 
   init() { this.panel.html(this.template); }
-  show() { this.panel.show(); }
+  show() {
+    this.panel.show();
+    $($constants.domSelectors.startButton).text('Start');
+  }
+
   hide() { this.panel.hide(); }
 
   /**
@@ -39,5 +44,10 @@ export class TetrisGameover implements ITetrisGameover {
     }
 
     return over;
+  }
+
+  onGameover(tetris: ITetrisGame) {
+    tetris.stop();
+    setTimeout(() => tetris.gameover.show(), 500);
   }
 }

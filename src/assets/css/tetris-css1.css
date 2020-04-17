@@ -46,8 +46,10 @@
 	text-align:left;
 	font-family:Verdana;
 	font-size:12px;
-	color:#fffff;
+	color: #ffffff;
+	margin-top: 20px;
  }
+
 
  .label {
 	background-color:#a0d0ff;
