@@ -29,15 +29,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run 'npm run build'
       run: npm run build.prod
-      
-    # Runs a single command using the runners shell
-    - name: Copy src/index.html to dist
-      run: cp src/index.html dist/ -f
-      
-    # Runs a single command using the runners shell
-    - name: Copy src/assets to dist
-      run: cp src/assets dist/ -rf
-      
+            
     # Deploy 
     # - name: Deploy to GitHub Pages
     #   uses: JamesIves/github-pages-deploy-action@3.4.8
