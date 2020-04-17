@@ -1,7 +1,8 @@
 {
   "name": "webpack-typescript-starter",
   "version": "0.0.1",
-  "description": "A simple Webpack 4 starter with TypeScript transpilation",
+  "description": "Tetris game built with typescript",
+  "homepage": "https://DerekToop.github.io/tsgames",
   "main": "index.js",
   "scripts": {
     "webpack": "node node_modules/webpack/bin/webpack.js",
